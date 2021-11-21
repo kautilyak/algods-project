@@ -17,7 +17,7 @@
  Should contain a `Node` and a `List` class.
  > **Node** class  stores a `value` and a `next` variable to point to the next node.
  > **List** class initializes and stores the `head`, `tail` and `length` properties.
- >> Additionally it has methods to `push` to the head, `pop`, `get` methods.
+ >> Additionally it has methods to `push` to the head, `insert`, `pop`, `get` methods.
 
 ## Vertex
  Should contain meta data on `name` (String), `pred` (Vertex), `dist` (number), Adjacent vertices `adj` (Linkedlist), `link_status` (String)

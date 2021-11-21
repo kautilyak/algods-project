@@ -1,3 +1,4 @@
+from typing import OrderedDict
 from . import path
 from . import error
 from . import edge
@@ -5,6 +6,7 @@ from . import vertex
 from . import linkedlist
 import heapq
 import numpy as np
+import collections
 
 class Graph:
     def __init__(self):
@@ -52,7 +54,7 @@ class Graph:
             new_edge: edge.Edge = edge.Edge(w, weight)
             
             # add this new edge to the adj list of the source vertex 'v'
-            v.adjacent.push(new_edge)
+            v.adjacent.insert(new_edge)
     
 
     # remove an existing edge from the graph.
@@ -182,8 +184,6 @@ class Graph:
                             heapq.heappush(queue, path.Path(w.name, w.dist))
 
                 current = current.next
-            # x= self.vertexMap
-            # print(x)
 
 
     # Driver routine to print total distance.
@@ -209,4 +209,13 @@ class Graph:
             print(" to ", end ="")
         print(dest.name, end ="")
 
+    # print the graph
+    def printGraph(self):
+        print(self.vertexMap)
+        for key, value in sorted(self.vertexMap.items(), key=lambda x: x[0]):
+            print(key)
+            current: linkedlist.Node = value.adjacent.head
+            while current != None:
+                print('\t', current.val.destination.name, current.val.dist)
+                current = current.next
         

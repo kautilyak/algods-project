@@ -23,6 +23,29 @@ class LinkedList:
             newNode.next = self.head
             self.head = newNode
             self.length = self.length + 1
+
+    def insert(self, val: edge.Edge):
+        newNode = Node(val)
+        # Special case for the empty linked list 
+        if self.head is None:
+            newNode.next = self.head
+            self.head = newNode
+  
+        # Special case for head at end
+        elif self.head.val.destination.name >= newNode.val.destination.name:
+            newNode.next = self.head
+            self.head = newNode
+  
+        else :
+  
+            # Locate the node before the point of insertion
+            current = self.head
+            while(current.next is not None and current.next.val.destination.name < newNode.val.destination.name):
+                current = current.next
+              
+            newNode.next = current.next
+            current.next = newNode
+        
     
     def deleteNode(self, key):
         current = self.head
