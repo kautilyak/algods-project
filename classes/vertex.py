@@ -1,4 +1,5 @@
-from linkedlist import LinkedList
+from . import linkedlist
+import numpy as np
 
 class Vertex:
     def __init__(self, name):
@@ -6,4 +7,8 @@ class Vertex:
         self.status = 'UP'
         self.dist = float('inf')
         self.pred = None
-        self.adjacent = LinkedList()
+        self.adjacent = linkedlist.LinkedList()
+    
+    def reset(self):
+        self.dist = np.inf
+        self.prev = None
