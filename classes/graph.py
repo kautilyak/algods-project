@@ -211,11 +211,22 @@ class Graph:
 
     # print the graph
     def printGraph(self):
-        print(self.vertexMap)
         for key, value in sorted(self.vertexMap.items(), key=lambda x: x[0]):
             print(key)
             current: linkedlist.Node = value.adjacent.head
             while current != None:
                 print('\t', current.val.destination.name, current.val.dist)
                 current = current.next
+
+    def printReachable(self):
+        for key, value in sorted(self.vertexMap.items(), key=lambda x: x[0]):
+            currentVertex: vertex.Vertex = value
+            if currentVertex.status == 'UP':
+                print(key)
+                current: linkedlist.Node = currentVertex.adjacent.head
+                while current != None:
+                    currentEdge: edge.Edge = current.val
+                    if currentEdge.status == 'UP':
+                        print('\t', currentEdge.destination.name)
+                    current = current.next
         
