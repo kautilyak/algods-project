@@ -4,6 +4,7 @@ from . import edge
 from . import vertex
 from . import linkedlist
 import heapq
+import numpy as np
 
 class Graph:
     def __init__(self):
@@ -138,7 +139,7 @@ class Graph:
         # Set initial vertex distance to 0
         init_v.dist = 0.0
         heapq.heappush(queue, path.Path(init_v.name, init_v.dist))
-        
+
         # while queue is not empty, BFS.
         while len(queue) != 0:
             min: path.Path = heapq.heappop(queue)
@@ -177,5 +178,28 @@ class Graph:
             # x= self.vertexMap
             # print(x)
 
+
+    # Driver routine to print total distance.
+    # It calls recursive routine to print shortest path to
+    # destNode after a shortest path algorithm has run.
+    def printPath(self, destName: str):
+        w: vertex.Vertex = self.vertexMap[destName]
+        if w is None:
+            print("Destination vertex not found")
+        elif np.isinf(w.dist):
+            raise Exception(destName + " is unreachable")
+        else:
+            print("(Distance is: " + str(w.dist) + ") ", end ="")
+            self.printPath_(w)
+        print()
+
+    # Recursive routine to print shortest path to dest
+    # after running shortest path algorithm. The path
+    # is known to exist.
+    def printPath_(self, dest: vertex.Vertex):
+        if dest.pred is not None:
+            self.printPath_(dest.pred)
+            print(" to ", end ="")
+        print(dest.name, end ="")
 
         
