@@ -150,7 +150,7 @@ class Graph:
         # while queue is not empty, BFS.
         while len(queue) != 0:
             min: path.Path = heapq.heappop(queue)
-            v: vertex.Vertex = self.vertexMap[str(min.name)]
+            v: vertex.Vertex = self.getVertex(str(min.name))
             
             # for every edge of v. Add to queue.
             current: linkedlist.Node = v.adjacent.head

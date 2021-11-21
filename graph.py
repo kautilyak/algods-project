@@ -14,14 +14,14 @@ def processRequest(g: Graph):
         if query.lower() == 'path':
             startName: str = command[1] # Source
             destName: str = command[2]  # Destination
-            print(startName, destName)
             g.Djikstra(startName) # Find Shortest path
             g.printPath(destName) # Print path
 
         if query.lower() == 'addedge':
             startName: str = command[1] # Source
             destName: str = command[2]  # Destination
-            g.addEdge(startName, destName)
+            weight: float = float(command[3])  # Destination
+            g.addEdge(startName, destName, weight)
             
         if query.lower() == 'deletedge':
             startName: str = command[1] # Source
