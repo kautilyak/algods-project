@@ -10,6 +10,12 @@ class Graph:
     def __init__(self):
         self.vertexMap =  dict()
 
+    # Initializes the vertex output info prior to running
+    # any shortest path algorithm.
+    def clearAll(self):
+        for v in self.vertexMap.values():
+            v.reset()
+
     # If vertexName is not present, add it to vertexMap.
     # In either case, return the Vertex.
     def  getVertex(self, vertexName: str):
@@ -124,6 +130,7 @@ class Graph:
 
     # Djikstra's algorithm implementation for shortest path.
     def Djikstra(self, sourceVertex: str):
+        self.clearAll()
         queue = []
 
         # check if vertex is available.

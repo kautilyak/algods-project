@@ -11,4 +11,4 @@ class Vertex:
     
     def reset(self):
         self.dist = np.inf
-        self.prev = None
+        self.pred = None
