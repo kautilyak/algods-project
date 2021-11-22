@@ -51,6 +51,9 @@ def processRequest(g: Graph):
         
         if query.lower() == 'reachable':
             g.printReachable()
+        
+        if query.lower() == 'quit':
+            return False
 
     except Exception as e:
         print(e)
