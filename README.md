@@ -94,6 +94,7 @@ This is where most of the functionality lies. It has all the methods related to 
 - `Djikstra()` - Find the shortest path in the graph from the source vertex
 - `printPath()` - Print the shortest path in the graph from source to destination
 - `printReachable()` - Print all the reachable vertices and edges in the graph.
+- `getReachable()` - Print all the reachable edges for a vertex recursively.
 - `printGraph()` - Print all the vertices and edges in the graph.
 
 
