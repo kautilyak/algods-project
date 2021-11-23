@@ -6,7 +6,6 @@ from . import vertex
 from . import linkedlist
 import heapq
 import numpy as np
-import collections
 
 class Graph:
     def __init__(self):
@@ -219,14 +218,66 @@ class Graph:
                 current = current.next
 
     def printReachable(self):
-        for key, value in sorted(self.vertexMap.items(), key=lambda x: x[0]):
-            currentVertex: vertex.Vertex = value
-            if currentVertex.status == 'UP':
-                print(key)
-                current: linkedlist.Node = currentVertex.adjacent.head
+        for key, v in sorted(self.vertexMap.items(), key=lambda x: x[0]):
+            if v.status == 'UP':
+                v.reachable = []
+                # for every edge store all its reachable vertices in a list
+                # if already in list, ignore.
+                print(v.name)
+                current: linkedlist.Node = v.adjacent.head
+
                 while current != None:
                     currentEdge: edge.Edge = current.val
                     if currentEdge.status == 'UP':
-                        print('\t', currentEdge.destination.name)
+                        # Check if the current dest vertex is already in reachable.
+                        if currentEdge.destination.name not in v.reachable:
+                            # add current destination vertex to reachable 
+                            v.reachable.append(currentEdge.destination.name)
+                            # search the destination vertex for reachable paths
+                            self.getReachable(v, currentEdge.destination)
                     current = current.next
+
+    def getReachable(self, v: vertex.Vertex, edgeVertex: vertex.Vertex):
         
+        current: linkedlist.Node = edgeVertex.adjacent.head
+
+        while current != None:
+            currentEdge: edge.Edge = current.val
+            if currentEdge.status == 'UP':
+                # Check if the current dest vertex is already in reachable.
+                if currentEdge.destination.name not in v.reachable:
+                    # add current destination vertex to reachable 
+                    v.reachable.append(currentEdge.destination.name)
+                    # recursive call
+                    self.getReachable(v, currentEdge.destination)
+            current = current.next
+
+    def DFS(self):
+        self.time: int = 0
+        for vertexName, vertex in sorted(self.vertexMap.items(), key= lambda x: x[0]):
+            vertex.color = 'WHITE'
+            vertex.pred = None
+
+        for vertexName, vertex in sorted(self.vertexMap.items(), key= lambda x: x[0]):
+            if vertex.color == 'WHITE':
+                self.DFSVisit(vertex)
+
+    def DFSVisit(self, v: vertex.Vertex):
+        v.color = 'GRAY'
+        self.time += 1
+        v.dist = self.time
+
+        current: linkedlist.Node = v.adjacent.head
+        while current != None:
+            currentEdge: edge.Edge = current.val
+            currentVertex: vertex.Vertex = currentEdge.destination
+            if currentVertex.color == 'WHITE':
+                currentVertex.pred = v
+            # iterate
+            current = current.next
+
+        # Mark v as finished.
+        v.color = 'BLACK'
+        self.time += 1
+        v.finish = self.time
+
