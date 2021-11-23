@@ -1,5 +1,25 @@
 # algods-project
  Final project for Algorithms and Data Structures class of Fall 2021. [ITCS-6114/8114]
+ 
+ **NAME** : _Kautilya Kondragunta_ <br>
+ **ID**: _801231832_
+
+# Usage
+1. Clone the repository 
+2. Run using command `python -m graph INPUT.TXT` (INPUT file network.txt is already provided)
+3. Use any of the following commands to manipulate the graph.
+
+# Commands:
+- `path` _SOURCE_ _DESTINATION_ 
+- `addedge` _SOURCE_ _DESTINATION_ _WEIGHT_
+- `deleteedge` _SOURCE_ _DESTINATION_  
+- `edgedown` _SOURCE_ _DESTINATION_
+- `edgeup` _SOURCE_ _DESTINATION_  
+- `vertexdown` _VERTEX_NAME_ 
+- `vertexup` _VERTEX_NAME_ 
+- `print` 
+- `reachable`
+- `quit`
 
 
 # Classes Required
