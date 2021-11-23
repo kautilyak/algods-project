@@ -12,3 +12,6 @@ class Vertex:
     def reset(self):
         self.dist = np.inf
         self.pred = None
+
+    def __lt__(self, other):
+        return self.name < other.name

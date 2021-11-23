@@ -1,4 +1,4 @@
-from typing import OrderedDict
+from typing import OrderedDict, Set
 from . import path
 from . import error
 from . import edge
@@ -6,11 +6,11 @@ from . import vertex
 from . import linkedlist
 import heapq
 import numpy as np
-import collections
 
 class Graph:
     def __init__(self):
         self.vertexMap =  dict()
+        self.visited = set()
 
     # Initializes the vertex output info prior to running
     # any shortest path algorithm.
@@ -217,19 +217,43 @@ class Graph:
             while current != None:
                 print('\t', current.val.destination.name, current.val.dist)
                 current = current.next
-                
-    # The printReachable() function goes over the vertexMap once for every vertex (V). 
-    # Within the vertex iteration, it goes through the adjacency list of each vertex - which is a list of edges (E) each vertext is connected by.
-    # So we can say that the total time complexity for the function is O(V+E).
+
+    # Function called when `reachable` is called.
+    # Keeps track of the adjacent vertices and calls `getReachable` for each vertex
+    # `getReachable` populates the self.visited set - which we use to print out the results.
     def printReachable(self):
-        for key, value in sorted(self.vertexMap.items(), key=lambda x: x[0]):
-            currentVertex: vertex.Vertex = value
-            if currentVertex.status == 'UP':
-                print(key)
-                current: linkedlist.Node = currentVertex.adjacent.head
-                while current != None:
-                    currentEdge: edge.Edge = current.val
-                    if currentEdge.status == 'UP':
-                        print('\t', currentEdge.destination.name)
-                    current = current.next
+        s: set = set()
+        for key, v in sorted(self.vertexMap.items(), key= lambda x: x[0]):
+            if v.status == 'UP':
+                s.add(v)
+        for s_vert in sorted(list(s)):
+            print(s_vert.name)
+            self.visited.clear()
+            self.visited.add(s_vert)
+            self.getReachable(s_vert)
+
+            for item in sorted(list(self.visited)):
+                if item != s_vert:
+                    print('\t', item.name)
+
+
+
+    # Helper function for `printReachable` 
+    # Recursively calls itself for every adjacent vertex until current vertex == None hits as base case.
+    # Result is self.visited being filled with all the reachable vertices from source vertex 's_vert' in `printReachable()`
+    def getReachable(self, v: vertex.Vertex):
+        adjacent = set()
+        current: linkedlist.Node = v.adjacent.head
+        while current != None:
+            if current.val.status == "UP": # Edge is up
+                if current.val.destination.status == 'UP': # Vertex is up
+                    adjacent.add(current.val.destination)
+            current = current.next
         
+        for vert in adjacent:
+            if vert in self.visited:
+                continue
+            self.visited.add(vert)
+            self.getReachable(vert)
+
+
