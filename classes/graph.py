@@ -217,7 +217,10 @@ class Graph:
             while current != None:
                 print('\t', current.val.destination.name, current.val.dist)
                 current = current.next
-
+                
+    # The printReachable() function goes over the vertexMap once for every vertex (V). 
+    # Within the vertex iteration, it goes through the adjacency list of each vertex - which is a list of edges (E) each vertext is connected by.
+    # So we can say that the total time complexity for the function is O(V+E).
     def printReachable(self):
         for key, value in sorted(self.vertexMap.items(), key=lambda x: x[0]):
             currentVertex: vertex.Vertex = value
