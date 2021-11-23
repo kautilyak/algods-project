@@ -62,4 +62,9 @@ This is where most of the functionality lies. It has all the methods related to 
 - `printGraph()` - Print all the vertices and edges in the graph.
 
 
+## Time complexity of printReachable():
+
+- The `printReachable()` function goes over the *vertexMap* once for every vertex  (V). Within the vertex iteration, it goes through the adjacency list of each vertex - which is a list of edges (E) each vertext is connected by. So we can say that the total time complexity for the function is **O(V+E)**.
+
+
 
