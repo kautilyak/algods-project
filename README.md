@@ -1,30 +1,33 @@
 # algods-project
- Final project for Algorithms and Data Structures class of Fall 2021. [ITCS-6114/8114]
+Final project for Algorithms and Data Structures class of Fall 2021. [ITCS-6114/8114]
  
- **NAME** : _Kautilya Kondragunta_ <br>
- **ID**: _801231832_
+                                                       Kautilya Kondragunta
+                                                          ID: 801231832
 
 # Project Introduction
-Consider a data communication network that must route data packets (email, MP3 files, or video
-files, for example). Such a network consists of routers connected by physical cables or links. A
-router can act as a source, a destination, or a forwarder of data packets. We can model a network
-as a graph with each router corresponding to a vertex and the link or physical connection between
-two routers corresponding to a pair of directed edges between the vertices.
-A network that follows the OSPF (Open Shortest Path First) protocol routes packets using
-Dijkstra’s shortest path algorithm. The criteria used to compute the weight corresponding to a
-link can include the time taken for data transmission, reliability of the link, transmission cost, and
-available bandwidth. Typically each router has a complete representation of the network graph
-and associated information available to it.
-For the purposes of this project, each link has associated with it the transmission time taken
-for data to get from the vertex at one end to the vertex at the other end. You will compute the
-best path using the criterion of minimizing the total time taken for data to reach the destination.
-The shortest time path minimizes the sum of the transmission times of the links along the path.
-The network topology can change dynamically based on the state of the links and the routers.
-For example, a link may go down when the corresponding cable is cut, and a vertex may go down
-when the corresponding router crashes. In addition to these transient changes, changes to a network
-occur when a link is added or removed.
+ Consider a data communication network that must route data packets (email, MP3 files, or video
+ files, for example). Such a network consists of routers connected by physical cables or links. A
+ router can act as a source, a destination, or a forwarder of data packets. We can model a network
+ as a graph with each router corresponding to a vertex and the link or physical connection between
+ two routers corresponding to a pair of directed edges between the vertices.
+ A network that follows the OSPF (Open Shortest Path First) protocol routes packets using
+ Dijkstra’s shortest path algorithm. The criteria used to compute the weight corresponding to a
+ link can include the time taken for data transmission, reliability of the link, transmission cost, and
+ available bandwidth. Typically each router has a complete representation of the network graph
+ and associated information available to it.
+ For the purposes of this project, each link has associated with it the transmission time taken
+ for data to get from the vertex at one end to the vertex at the other end. You will compute the
+ best path using the criterion of minimizing the total time taken for data to reach the destination.
+ The shortest time path minimizes the sum of the transmission times of the links along the path.
+ The network topology can change dynamically based on the state of the links and the routers.
+ For example, a link may go down when the corresponding cable is cut, and a vertex may go down
+ when the corresponding router crashes. In addition to these transient changes, changes to a network
+ occur when a link is added or removed.
+ 
+ ![image](https://user-images.githubusercontent.com/28112225/143088930-374e756d-a4ff-4865-b818-557117daf7bf.png)
 
-# Taks
+
+# Tasks
 1. Building the initial graph
 2. Updating the graph to reflect changes.
 3. Finding the shortest path between any two vertices in the graph based on its current state.
@@ -34,7 +37,7 @@ occur when a link is added or removed.
 
 # Usage
 1. Clone the repository 
-2. Run using command `python -m graph INPUT.TXT` (INPUT file network.txt is already provided)
+2. Run using command ```python -m graph INPUT.TXT``` (INPUT file network.txt is already provided)
 3. Use any of the following commands to manipulate the graph.
 
 # Commands:
@@ -96,7 +99,7 @@ This is where most of the functionality lies. It has all the methods related to 
 
 ## Time complexity of printReachable():
 
-- The `printReachable()` function goes over the *vertexMap* once for every vertex  (V). Within the vertex iteration, it goes through the adjacency list of each vertex - which is a list of edges (E) each vertext is connected by. So we can say that the total time complexity for the function is **O(V+E)**.
+- The `printReachable()` function goes over the *vertexMap* once for every vertex  (V). Within the vertex iteration, it goes through the adjacency list of each vertex by calling the `getReachable()` function - which is a list of edges (E) each vertex is connected by and it recursively calls itself until all the vertices in the path reachable are covered. So we can say that the total time complexity for the function is **O(VE)**.
 
 
 
