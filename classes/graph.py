@@ -209,13 +209,21 @@ class Graph:
             print(" to ", end ="")
         print(dest.name, end ="")
 
+
     # print the graph
     def printGraph(self):
         for key, value in sorted(self.vertexMap.items(), key=lambda x: x[0]):
-            print(key)
+            vert_status = ''
+            if value.status == 'DOWN':
+                vert_status = 'DOWN'
+
+            print(key, vert_status)
             current: linkedlist.Node = value.adjacent.head
             while current != None:
-                print('\t', current.val.destination.name, current.val.dist)
+                edge_status = ''
+                if current.val.status == 'DOWN':
+                    edge_status = 'DOWN'
+                print('\t', current.val.destination.name, current.val.dist, edge_status)
                 current = current.next
 
     # Function called when `reachable` is called.
