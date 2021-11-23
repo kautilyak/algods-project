@@ -1,4 +1,4 @@
-from typing import OrderedDict
+from typing import OrderedDict, Set
 from . import path
 from . import error
 from . import edge
@@ -10,6 +10,7 @@ import numpy as np
 class Graph:
     def __init__(self):
         self.vertexMap =  dict()
+        self.visited = set()
 
     # Initializes the vertex output info prior to running
     # any shortest path algorithm.
@@ -217,67 +218,41 @@ class Graph:
                 print('\t', current.val.destination.name, current.val.dist)
                 current = current.next
 
+    # Function called when `reachable` is called.
+    # Keeps track of the adjacent vertices and calls `getReachable` for each vertex
+    # `getReachable` populates the self.visited set - which we use to print out the results.
     def printReachable(self):
-        for key, v in sorted(self.vertexMap.items(), key=lambda x: x[0]):
+        s: set = set()
+        for key, v in sorted(self.vertexMap.items(), key= lambda x: x[0]):
             if v.status == 'UP':
-                v.reachable = []
-                # for every edge store all its reachable vertices in a list
-                # if already in list, ignore.
-                print(v.name)
-                current: linkedlist.Node = v.adjacent.head
+                s.add(v)
+        for s_vert in sorted(list(s)):
+            print(s_vert.name)
+            self.visited.clear()
+            self.visited.add(s_vert)
+            self.getReachable(s_vert)
 
-                while current != None:
-                    currentEdge: edge.Edge = current.val
-                    if currentEdge.status == 'UP':
-                        # Check if the current dest vertex is already in reachable.
-                        if currentEdge.destination.name not in v.reachable:
-                            # add current destination vertex to reachable 
-                            v.reachable.append(currentEdge.destination.name)
-                            # search the destination vertex for reachable paths
-                            self.getReachable(v, currentEdge.destination)
-                    current = current.next
+            for item in sorted(list(self.visited)):
+                if item != s_vert:
+                    print('\t', item.name)
 
-    def getReachable(self, v: vertex.Vertex, edgeVertex: vertex.Vertex):
-        
-        current: linkedlist.Node = edgeVertex.adjacent.head
 
-        while current != None:
-            currentEdge: edge.Edge = current.val
-            if currentEdge.status == 'UP':
-                # Check if the current dest vertex is already in reachable.
-                if currentEdge.destination.name not in v.reachable:
-                    # add current destination vertex to reachable 
-                    v.reachable.append(currentEdge.destination.name)
-                    # recursive call
-                    self.getReachable(v, currentEdge.destination)
-            current = current.next
 
-    def DFS(self):
-        self.time: int = 0
-        for vertexName, vertex in sorted(self.vertexMap.items(), key= lambda x: x[0]):
-            vertex.color = 'WHITE'
-            vertex.pred = None
-
-        for vertexName, vertex in sorted(self.vertexMap.items(), key= lambda x: x[0]):
-            if vertex.color == 'WHITE':
-                self.DFSVisit(vertex)
-
-    def DFSVisit(self, v: vertex.Vertex):
-        v.color = 'GRAY'
-        self.time += 1
-        v.dist = self.time
-
+    # Helper function for `printReachable` 
+    # Recursively calls itself for every adjacent vertex until current vertex == None hits as base case.
+    # Result is self.visited being filled with all the reachable vertices from source vertex 's_vert' in `printReachable()`
+    def getReachable(self, v: vertex.Vertex):
+        adjacent = set()
         current: linkedlist.Node = v.adjacent.head
         while current != None:
-            currentEdge: edge.Edge = current.val
-            currentVertex: vertex.Vertex = currentEdge.destination
-            if currentVertex.color == 'WHITE':
-                currentVertex.pred = v
-            # iterate
+            if current.val.status == "UP": # Edge is up
+                if current.val.destination.status == 'UP': # Vertex is up
+                    adjacent.add(current.val.destination)
             current = current.next
-
-        # Mark v as finished.
-        v.color = 'BLACK'
-        self.time += 1
-        v.finish = self.time
+        
+        for vert in adjacent:
+            if vert in self.visited:
+                continue
+            self.visited.add(vert)
+            self.getReachable(vert)
 

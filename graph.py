@@ -68,8 +68,8 @@ def processRequest(g: Graph):
 #    source destination
 def main():
     g = Graph()
-    #fin = sys.argv[1]
-    with open('network.txt') as f:
+    fin = sys.argv[1]
+    with open(fin) as f:
         lines = f.readlines()
     #  Read the edges and insert
     for line in lines:
