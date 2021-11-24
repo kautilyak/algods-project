@@ -78,6 +78,7 @@ class LinkedList:
     
             current = None
 
+    # Get the value of node at position: pos
     def get(self, pos):
         if pos >= self.length:
             return None
@@ -88,6 +89,7 @@ class LinkedList:
             currentNode = currentNode.next
         return currentNode
     
+    # Print the list
     def print(self):
         currentNode = self.head
         list = []

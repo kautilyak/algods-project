@@ -85,8 +85,11 @@ def main():
         g.addEdge(source, dest, weight)
     print("File read...")
     print(str(len(g.vertexMap)) + " vertices")
-    while processRequest(g):
-        pass
+    try:
+        while processRequest(g):
+            pass
+    except KeyboardInterrupt:
+        print('\n\nQuitting program...')
 
 if __name__=="__main__":
     main()
