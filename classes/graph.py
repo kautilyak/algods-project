@@ -196,8 +196,8 @@ class Graph:
         elif np.isinf(w.dist):
             raise Exception(destName + " is unreachable")
         else:
-            print("(Distance is: " + str(w.dist) + ") ", end ="")
             self.printPath_(w)
+            print(" " + str(w.dist), end="")
         print()
 
     # Recursive routine to print shortest path to dest
@@ -206,7 +206,7 @@ class Graph:
     def printPath_(self, dest: vertex.Vertex):
         if dest.pred is not None:
             self.printPath_(dest.pred)
-            print(" to ", end ="")
+            print(" ", end ="")
         print(dest.name, end ="")
 
 
@@ -223,7 +223,7 @@ class Graph:
                 edge_status = ''
                 if current.val.status == 'DOWN':
                     edge_status = 'DOWN'
-                print('\t', current.val.destination.name, current.val.dist, edge_status)
+                print('  ', current.val.destination.name, current.val.dist, edge_status)
                 current = current.next
 
     # Function called when `reachable` is called.
@@ -242,7 +242,7 @@ class Graph:
 
             for item in sorted(list(self.visited)):
                 if item != s_vert:
-                    print('\t', item.name)
+                    print('  ', item.name)
 
 
 
@@ -252,7 +252,7 @@ class Graph:
     def getReachable(self, v: vertex.Vertex):
         adjacent = set()
         current: linkedlist.Node = v.adjacent.head
-        while current != None: # O(E)
+        while current != None: # 
             if current.val.status == "UP": # Edge is up
                 if current.val.destination.status == 'UP': # Vertex is up
                     adjacent.add(current.val.destination)
