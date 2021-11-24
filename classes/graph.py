@@ -238,7 +238,7 @@ class Graph:
             print(s_vert.name)
             self.visited.clear()
             self.visited.add(s_vert)
-            self.getReachable(s_vert) 
+            self.getReachable(s_vert) #O(V+E) [DFS]
 
             for item in sorted(list(self.visited)):
                 if item != s_vert:
@@ -252,13 +252,13 @@ class Graph:
     def getReachable(self, v: vertex.Vertex):
         adjacent = set()
         current: linkedlist.Node = v.adjacent.head
-        while current != None: # 
+        while current != None: 
             if current.val.status == "UP": # Edge is up
                 if current.val.destination.status == 'UP': # Vertex is up
                     adjacent.add(current.val.destination)
             current = current.next
         
-        for vert in adjacent: # O(E)
+        for vert in adjacent: 
             if vert in self.visited:
                 continue
             self.visited.add(vert)

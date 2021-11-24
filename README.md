@@ -100,7 +100,7 @@ This is where most of the functionality lies. It has all the methods related to 
 
 ## Time complexity of printReachable():
 
-- The `printReachable()` function goes over the *vertexMap* once for every vertex  (V). Within the vertex iteration, it goes through the adjacency list of each vertex by calling the `getReachable()` function - which is a list of edges (E) each vertex is connected by and it recursively calls itself until all the vertices in the path reachable are covered. So we can say that the total time complexity for the function is **O(VE)**.
+- The `printReachable()` function goes over the *vertexMap* once for every vertex  (V). Within the vertex iteration, it goes through the adjacency list of each vertex by calling the `getReachable()` function - which is a list of edges (E) each vertex is connected by and it recursively calls itself until all the vertices in the path reachable are covered. This function is similar to Depth first search and the time complexity of `getReachable()` is O(V+E). Since it gets called once every vertex 'v' _the total time complexity is O(V(V+E))_
 
 
 
