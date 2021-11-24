@@ -1,3 +1,5 @@
+# Name: Kautilya Kondragunta
+
 class GraphError(Exception):
     """Exception raised for errors in the graph.
 

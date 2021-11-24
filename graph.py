@@ -1,3 +1,5 @@
+# Name: Kautilya Kondragunta
+
 from numpy import degrees
 from classes.error import GraphError
 from classes.graph import Graph

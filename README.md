@@ -64,14 +64,14 @@ Final project for Algorithms and Data Structures class of Fall 2021. [ITCS-6114/
 
 ## LinkedList
  - Represents the adjacency list of all the edges for a vertex in the graph.
- - Should contain a `Node` and a `List` class.
+ - Contains a `Node` and a `List` class.
  > **Node** class  stores a `value` and a `next` variable to point to the next node.
  > **List** class initializes and stores the `head`, `tail` and `length` properties.
  >> Additionally it has methods to `push` to the head, `insert`, `pop`, `get` methods.
 
 ## Vertex
 - Represents each node in the graph.
-> Should contain meta data on `name` (String), `pred` (Vertex), `dist` (number), Adjacent vertices `adj` (Linkedlist), `link_status` (String)
+> Should contain meta data on `name` (Vertex Name), `pred` (Previous Vertex), `dist` (Distance from predecessor), Adjacent vertices `adj` (Adjacency Linkedlist), `link_status` (UP or DOWN)
  
 ## Edge
 - Represents the connection between two vertices.
